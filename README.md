@@ -1,5 +1,7 @@
 # CPSS — Cyber-Physical Severity Scale
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19026588.svg)](https://doi.org/10.5281/zenodo.19026588)
+
 A logarithmic severity scale for cyberattacks against Industrial Control Systems (ICS)
 that produce physical, environmental, and societal consequences.
 
