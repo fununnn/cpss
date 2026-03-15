@@ -1,0 +1,101 @@
+event,year,country,sector,scenario,process_variable,process_deviation,hazard,H,E,I,i_basis,C,cpss_actual,cpss_potential,class,source,source_type,confidence
+Maroochy Shire Sewage,2000,Australia,water,process_manipulation,flow,reverse,hydrological,0,4,0.3,population,0,4.0,5,MODERATE,Slay & Miller (2007) IFIP Critical Infrastructure Protection,academic,high
+Davis-Besse Nuclear,2003,USA,nuclear,supply_chain_compromise,temperature,more,radiological,0,0,0.3,population,1,1.0,7,LOW,NRC Event Report (2003); Lemos (2003) CNET,government,high
+CSX Train Signaling Slammer,2003,USA,transportation,supply_chain_compromise,speed,unstable,mechanical,0,0,1.0,population,2,2.0,5,LOW,Byres & Lowe (2004) SANS ICS; ISC/CERT Advisory MS03-026 (2003),academic,medium
+Browns Ferry Nuclear,2006,USA,nuclear,process_manipulation,voltage,unstable,radiological,0,0,0.3,population,1,1.0,7,LOW,NRC Event Report (2007); Meserve (2007) CNN,government,high
+Aurora Generator Test,2007,USA,power,control_logic_modification,speed,reverse,mechanical,0,0,0.3,population,2,2.0,6,LOW,DHS/INL (2007); Meserve (2007) CNN,government,medium
+Turkish Pipeline Explosion,2008,Turkey,oil_gas,control_logic_modification,pressure,more,thermal,0,3,0.3,population,2,3.0,6,MODERATE,Robertson & Riley (2014) Bloomberg; Zetter (2014) Countdown to Zero Day,news,medium
+Stuxnet,2010,Iran,nuclear,control_logic_modification,speed,more,mechanical,0,3,1.0,population,2,3.0,6,MODERATE,Langner (2011) IEEE S&P; Falliere et al. (2011) Symantec W32.Stuxnet Dossier,academic,high
+Duqu ICS Espionage,2011,global,manufacturing,supply_chain_compromise,voltage,unstable,none,0,0,0.0,ics_systems,1,1.0,4,LOW,Kaspersky Lab (2011) Duqu Analysis; Symantec (2011) W32.Duqu,vendor_report,high
+Bowman Avenue Dam,2013,USA,water,sensor_spoofing,level,unstable,none,0,0,0.3,ics_systems,0,0.3,3,LOW,DOJ (2016) Indictment US v. Amin et al.,government,high
+German Steel Mill,2014,Germany,manufacturing,control_logic_modification,temperature,more,thermal,0,2,0.3,population,2,2.0,5,LOW,BSI (2014) Annual Report on IT Security in Germany,government,medium
+Dragonfly Havex,2014,global,energy,sensor_spoofing,voltage,unstable,none,0,0,2.0,ics_systems,1,2.0,5,LOW,Symantec (2014) Dragonfly; F-Secure (2014) Havex,vendor_report,medium
+BlackEnergy US ICS,2014,USA,energy,supply_chain_compromise,voltage,unstable,none,0,0,2.0,ics_systems,1,2.0,5,LOW,ICS-CERT Alert ICS-ALERT-14-281-01B (2014),government,medium
+Ukraine Grid 1,2015,Ukraine,power,remote_shutdown,voltage,none,electrical,0,1,2.4,population,3,3.0,6,MODERATE,E-ISAC & SANS (2016); Zetter (2016) Wired,government,high
+Kemuri Water,2016,USA,water,process_manipulation,level,more,chemical,0,0,0.3,population,0,0.3,5,LOW,Verizon (2016) Data Breach Investigations Report,vendor_report,medium
+Industroyer Crashoverride,2016,Ukraine,power,remote_shutdown,voltage,none,electrical,0,1,2.0,population,2,2.0,6,LOW,ESET (2017) Industroyer; Dragos (2017) CrashOverride,vendor_report,high
+Triton TRISIS,2017,Saudi Arabia,oil_gas,safety_system_disable,pressure,more,thermal,0,1,0.3,population,2,2.0,7,LOW,FireEye (2017) TRITON; Dragos (2017) TRISIS,vendor_report,high
+Wolf Creek Nuclear Dragonfly,2017,USA,nuclear,supply_chain_compromise,temperature,more,none,0,0,0.0,ics_systems,1,1.0,7,LOW,FBI/DHS TA17-293A (2017); ICS-CERT Alert (2017),government,high
+VPNFilter,2018,global,energy,supply_chain_compromise,flow,none,none,0,0,2.0,ics_systems,1,2.0,5,LOW,Talos Intelligence (2018); FBI/DOJ (2018),vendor_report,high
+Norsk Hydro,2019,Norway,manufacturing,remote_shutdown,speed,none,mechanical,0,0,1.0,population,3,3.0,4,MODERATE,Norsk Hydro ASA Press Releases (2019); DNV GL (2019),news,high
+Xenotime Targeting,2019,global,oil_gas,safety_system_disable,pressure,more,none,0,0,0.0,ics_systems,1,1.0,7,LOW,Dragos (2019) Year in Review; FireEye (2019),vendor_report,medium
+Israel Water Infrastructure,2020,Israel,water,process_manipulation,level,more,chemical,0,0,1.0,population,0,1.0,6,LOW,Israel INCD Official Statement (2020); Armis (2020),government,medium
+EKANS Honda,2020,Japan,manufacturing,remote_shutdown,speed,none,mechanical,0,0,1.0,population,3,3.0,4,MODERATE,SentinelOne (2020); Malwarebytes (2020),vendor_report,medium
+Oldsmar Water Treatment,2021,USA,water,process_manipulation,level,more,chemical,0,0,0.3,population,0,0.3,5,LOW,Pinellas County Sheriff Press Conference (2021); CISA (2021),government,high
+Colonial Pipeline,2021,USA,oil_gas,remote_shutdown,flow,none,none,0,0,3.0,population,3,3.0,5,MODERATE,CISA Advisory AA21-131A (2021); US Senate Testimony (2021),government,high
+Discovery Bay Water Remote Attack,2021,USA,water,remote_shutdown,level,none,chemical,0,0,0.3,population,0,0.3,5,LOW,DOJ Press Release (2023) US v. Rambler Gallo; CISA (2021),government,high
+Natanz Nuclear Blackout,2021,Iran,nuclear,control_logic_modification,voltage,none,electrical,0,0,0.3,population,2,2.0,7,LOW,New York Times (2021); AP (2021); Israeli Intelligence Attribution,news,medium
+Iranian Railways MeteorExpress,2021,Iran,transportation,remote_shutdown,speed,none,mechanical,0,0,2.0,population,2,2.0,5,LOW,SentinelOne (2021) MeteorExpress; Check Point Research (2021),vendor_report,high
+Volue Hydropower Ransomware,2021,Norway,energy,remote_shutdown,level,none,hydrological,0,0,1.0,population,2,2.0,4,LOW,Volue Press Release (2021); NRK (2021),news,high
+South Staffordshire Water,2022,UK,water,remote_shutdown,flow,none,hydrological,0,0,3.0,population,2,3.0,6,MODERATE,South Staffs Water Statement (2022); Clop leak (2022),news,medium
+Predatory Sparrow Steel,2022,Iran,manufacturing,control_logic_modification,temperature,more,thermal,0,2,0.3,population,2,2.0,5,LOW,SentinelOne (2022); Video forensic analysis (2022),vendor_report,medium
+Oiltanking Germany,2022,Germany,oil_gas,remote_shutdown,flow,none,chemical,0,0,1.0,population,3,3.0,4,MODERATE,BSI Statement (2022); Oiltanking GmbH (2022),government,medium
+Industroyer2,2022,Ukraine,power,remote_shutdown,voltage,none,electrical,0,0,0.0,population,0,0.0,6,NONE,ESET (2022) Industroyer2; CERT-UA (2022),vendor_report,high
+INCONTROLLER PIPEDREAM ICS Malware,2022,USA,energy,safety_system_disable,pressure,more,none,0,0,0.0,ics_systems,1,1.0,7,LOW,CISA Advisory AA22-103A (2022); Dragos PIPEDREAM (2022); Mandiant (2022),government,high
+Viasat KA-SAT Enercon Wind Turbines,2022,Germany,energy,remote_shutdown,speed,none,mechanical,0,0,1.0,population,2,2.0,4,LOW,BSI Alert (2022); Enercon Press Release (2022); UK/US Attribution (2022),government,high
+Polish Railway,2023,Poland,transportation,sensor_spoofing,speed,unstable,mechanical,0,0,1.0,population,1,1.0,5,LOW,PKP PLK Statement (2023); Recorded Future (2023),news,medium
+IRGC Unitronics Water,2023,USA,water,process_manipulation,level,more,chemical,0,0,0.3,population,0,0.3,5,LOW,CISA Advisory AA23-335A (2023),government,high
+Port of Nagoya,2023,Japan,transportation,remote_shutdown,flow,none,mechanical,0,0,2.0,population,3,3.0,4,MODERATE,Nagoya Port Authority Statement (2023); LockBit claim (2023),news,high
+Danish Energy Sector SektorCERT,2023,Denmark,power,supply_chain_compromise,voltage,unstable,none,0,0,0.0,ics_systems,1,1.0,6,LOW,SektorCERT (2023) Denmark Attack Report; SecurityWeek (2023),vendor_report,high
+DP World Australia,2023,Australia,transportation,remote_shutdown,flow,none,mechanical,0,0,2.0,population,3,3.0,4,MODERATE,DP World Statement (2023); Australian Government Statement (2023),government,high
+Volt Typhoon ICS,2024,USA,power,supply_chain_compromise,voltage,unstable,none,0,0,0.0,ics_systems,1,1.0,7,LOW,CISA Advisory AA24-038A (2024); Microsoft (2024),government,medium
+FrostyGoop Lviv District Heating,2024,Ukraine,energy,control_logic_modification,temperature,less,thermal,0,0,2.0,population,2,2.0,5,LOW,Dragos (2024) FrostyGoop; CERT-UA (2024),vendor_report,high
+Nucor Steel Cyberattack,2024,USA,manufacturing,remote_shutdown,temperature,none,thermal,0,0,0.3,population,3,3.0,5,MODERATE,Nucor Corporation 8-K SEC Filing (2024); Reuters (2024),news,high
+Night Dragon Campaign,2011,global,oil_gas,supply_chain_compromise,flow,none,none,0,0.0,2.0,ics_systems,1.0,2.0,5,LOW,McAfee (2011) Night Dragon Report,vendor_report,medium
+Dragonfly 2.0,2017,USA,energy,supply_chain_compromise,voltage,none,none,0,0.0,2.0,ics_systems,1.0,2.0,6,LOW,Symantec (2017) Dragonfly 2.0; CISA Alert TA18-074A,vendor_report,high
+Monju Nuclear Malware,2012,Japan,nuclear,supply_chain_compromise,temperature,none,none,0,0.0,2.0,ics_systems,1.0,2.0,6,LOW,NHK (2012); Japan Atomic Energy Agency (JAEA) Statement (2012),news,medium
+Shamoon Saudi Aramco,2012,Saudi Arabia,oil_gas,remote_shutdown,flow,none,none,0,0.0,2.0,ics_systems,3.8,3.8,5,MODERATE,Symantec (2012) Shamoon; Saudi Aramco Statement (2012),vendor_report,high
+Shamoon 2,2016,Saudi Arabia,oil_gas,remote_shutdown,flow,none,none,0,0.0,2.0,ics_systems,2.7,2.7,5,MODERATE,Palo Alto Networks (2016); Symantec (2016) Shamoon 2,vendor_report,high
+ASUS ShadowHammer,2019,global,manufacturing,supply_chain_compromise,voltage,none,none,0,0.0,0.0,ics_systems,1.0,1.0,3,LOW,Kaspersky (2019) Operation ShadowHammer,vendor_report,medium
+Rye Brook Water Vendor Access,2016,USA,water,process_manipulation,level,more,chemical,0,0.0,1.0,population,0.0,1.0,5,LOW,DOJ (2021) US v. Khalid Faisal Albakih; FBI Pittsburgh Field Office,government,medium
+Bingham County Water Ransomware,2022,USA,water,remote_shutdown,level,none,chemical,0,0.0,1.3,population,0.7,1.3,4,LOW,CISA Advisory (2022); Local news Idaho (2022),government,medium
+MWRA Ransomware,2021,USA,water,remote_shutdown,flow,none,none,0,0.0,3.4,population,1.0,3.4,5,MODERATE,MWRA Statement (2021); Cyberscoop (2021),news,medium
+Verkada OT Camera Breach,2021,USA,manufacturing,sensor_spoofing,flow,none,none,0,0.0,0.0,ics_systems,0.7,0.7,3,LOW,Bloomberg (2021) Verkada Breach; Vice (2021),news,medium
+Chatsworth Train Collision SCADA Context,2008,USA,transportation,supply_chain_compromise,speed,none,mechanical,3.6,0.0,0.0,population,3.7,3.7,5,MODERATE,NTSB (2009) Chatsworth Collision Report; Byres (2010) ICS Security,government,low
+APT33 Energy Sector Targeting,2018,global,oil_gas,supply_chain_compromise,pressure,none,none,0,0.0,2.0,ics_systems,1.0,2.0,6,LOW,FireEye (2018) APT33; Symantec (2019) Leafminer,vendor_report,medium
+Lansing Water Utility Ransomware,2018,USA,water,remote_shutdown,flow,none,none,0,0.0,2.0,population,1.0,2.0,4,LOW,AWWA Cybersecurity Guidance (2019); Lansing Board of Water and Light Statement (2018),news,medium
+SolarWinds ICS Vendor Compromise,2020,USA,energy,supply_chain_compromise,voltage,none,none,0,0.0,2.0,ics_systems,2.6,2.6,6,MODERATE,CISA Emergency Directive 21-01 (2020); FireEye (2020) SUNBURST,government,high
+Fuxnet Moskvollector Sewage Sensors,2024,Russia,water,control_logic_modification,flow,none,none,0,0.0,3.2,ics_systems,1.7,3.2,4,MODERATE,Claroty (2024) Fuxnet Analysis; Blackjack Group Claim (2024),vendor_report,medium
+CosmicEnergy ICS Malware,2023,Russia,power,control_logic_modification,voltage,none,none,0,0.0,0.0,ics_systems,1.0,1.0,6,LOW,Mandiant (2023) CosmicEnergy; SecurityWeek (2023),vendor_report,medium
+Cyclops Blink Botnet Energy,2022,global,energy,supply_chain_compromise,voltage,none,none,0,0.0,2.0,ics_systems,1.0,2.0,5,LOW,CISA Advisory AA22-110A (2022); UK NCSC (2022) Cyclops Blink,government,high
+Kaseya VSA REvil Ransomware,2021,global,manufacturing,supply_chain_compromise,speed,none,none,0,0.0,3.2,ics_systems,2.8,3.2,5,MODERATE,CISA Advisory AA21-200A (2021); FBI Flash (2021),government,high
+JBS Foods REvil Ransomware,2021,USA,food,remote_shutdown,flow,none,mechanical,0,0.0,4.0,population,2.0,4.0,5,MODERATE,CISA Advisory (2021); JBS USA Statement (2021); FBI Flash (2021),government,high
+Pilgrims Pride Ransomware,2021,USA,food,remote_shutdown,flow,none,mechanical,0,0.0,3.3,population,1.0,3.3,4,MODERATE,JBS SEC Filing (2021); Reuters (2021),news,medium
+DESFA Greek Gas Operator Ransomware,2022,Greece,oil_gas,remote_shutdown,flow,none,chemical,0,0.0,3.5,population,1.7,3.5,5,MODERATE,DESFA Statement (2022); Ragnar Locker Claim (2022),news,medium
+Knoxville Utilities Board Ransomware,2020,USA,energy,remote_shutdown,voltage,none,none,0,0.0,2.0,population,1.0,2.0,4,LOW,KUB Statement (2020); SecurityWeek (2020),news,medium
+BlackCat ALPHV Energy Ransomware,2022,USA,energy,remote_shutdown,voltage,none,none,0,0.0,2.0,ics_systems,1.3,2.0,5,LOW,Dragos 2022 Year in Review; FBI Advisory (2022) BlackCat,vendor_report,medium
+Triton Second Deployment Site,2019,Saudi Arabia,oil_gas,safety_system_disable,pressure,more,none,0,1.0,0.3,ics_systems,1.3,1.3,7,LOW,FireEye (2019) TRITON Second Site Discovery; Dragos (2019) XENOTIME,vendor_report,high
+Trans-Siberian Pipeline Logic Bomb,2002,Russia,oil_gas,control_logic_modification,pressure,more,thermal,0.0,5.7,0.0,population,4.0,5.7,6,SEVERE,Reed (2004) At the Abyss; Thomas (2009) Christian Science Monitor,academic,low
+Metso Paper Mill DCS Malware,2012,Finland,manufacturing,control_logic_modification,speed,none,none,0,0.0,2.0,ics_systems,1.0,2.0,5,LOW,F-Secure (2012); ICS-CERT Year in Review 2012,vendor_report,medium
+Queensland Sewage SCADA Insider Attack,2001,Australia,water,process_manipulation,flow,reverse,hydrological,0,5.0,0.3,population,1.0,5.0,5,SEVERE,Abrams & Weiss (2008) CSIS; Australian court records (2001) R v Boden,academic,high
+Taum Sauk Dam SCADA Overflow,2005,USA,energy,process_manipulation,level,more,hydrological,1.6,6.6,0.2,population,3.3,6.6,7,CATASTROPHIC,FERC Investigation Report (2006); NRC (2007); AmerenUE Settlement,government,medium
+RedEcho India Power Grid,2020,India,power,supply_chain_compromise,voltage,none,electrical,0,0.0,4.1,population,2.0,4.1,6,SEVERE,Recorded Future (2021) RedEcho; India NCIIPC; Insikt Group (2021),vendor_report,medium
+RedEcho SE Asia Power Grid Recon,2020,global,energy,supply_chain_compromise,voltage,none,none,0,0.0,2.0,ics_systems,1.0,2.0,5,LOW,Recorded Future (2021) TAG-38; Insikt Group (2021),vendor_report,medium
+Ragnar Locker EDP Energias de Portugal,2021,Portugal,energy,remote_shutdown,voltage,none,none,0,0.0,4.0,population,2.0,4.0,5,MODERATE,ZDNet (2021) EDP Ragnar Locker; EDP Partial Statement (2021),news,medium
+HEXANE APT Oil Gas Targeting,2019,global,oil_gas,supply_chain_compromise,flow,none,none,0,0.0,2.0,ics_systems,1.0,2.0,5,LOW,Dragos (2019) HEXANE Activity Group; Kaspersky (2019),vendor_report,medium
+Deutsche Windtechnik Ransomware,2022,Germany,energy,remote_shutdown,speed,none,mechanical,0,0.0,3.0,population,1.3,3.0,4,MODERATE,Deutsche Windtechnik Statement (2022); SecurityWeek (2022),news,medium
+Chernobyl Radiation Monitoring Offline,2022,Ukraine,nuclear,remote_shutdown,flow,none,none,0,0.0,3.5,population,1.0,3.5,6,MODERATE,SNRIU Statement (2022); Reuters (2022); IAEA Report (2022),government,high
+Iranian Fuel Distribution SCADA Attack,2021,Iran,transportation,remote_shutdown,flow,none,none,0,0.0,4.4,population,2.0,4.4,5,SEVERE,AP (2021) Iran Fuel SCADA; Checkpoint (2021); Israel Intelligence Attribution,news,medium
+Greek Desalination Plant Intrusion,2020,Greece,water,process_manipulation,level,none,chemical,0,0.0,2.3,population,0.0,2.3,4,MODERATE,Greek NCSC (2020); Bleeping Computer (2020),government,low
+WannaCry Renault-Nissan Factory,2017,France,manufacturing,remote_shutdown,speed,none,mechanical,0,0.0,2.7,population,3.5,3.5,5,MODERATE,Reuters (2017) Renault WannaCry; Renault Statement (2017),news,high
+WannaCry Boeing Manufacturing,2017,USA,manufacturing,remote_shutdown,speed,none,mechanical,0,0.0,1.7,population,1.7,1.7,4,LOW,Seattle Times (2018) Boeing WannaCry; Boeing Statement (2018),news,medium
+WannaCry TSMC Chip Fabrication,2018,Taiwan,manufacturing,remote_shutdown,speed,none,mechanical,0,0.0,3.0,population,3.4,3.4,5,MODERATE,TSMC Statement (2018); Reuters (2018) TSMC WannaCry,news,high
+Merck NotPetya Pharmaceutical,2017,USA,manufacturing,remote_shutdown,flow,none,mechanical,0,0.0,3.7,population,4.1,4.1,5,SEVERE,Merck Annual Report (2018); Wired (2018) NotPetya; Insurance Litigation,news,high
+Mondelez NotPetya Food Manufacturing,2017,global,manufacturing,remote_shutdown,flow,none,mechanical,0,0.0,3.3,population,3.3,3.3,5,MODERATE,Mondelez Insurance Litigation (2018); Wired (2018) NotPetya,news,high
+Maersk NotPetya Port Terminals,2017,global,transportation,remote_shutdown,flow,none,mechanical,0,0.0,4.0,population,3.5,4.0,5,MODERATE,Maersk Annual Report (2018); Wired (2018) NotPetya; A.P. Moller Statement,news,high
+Pinellas County Wastewater Ransomware,2021,USA,water,remote_shutdown,flow,none,none,0,0.0,2.0,population,1.0,2.0,4,LOW,Pinellas County Statement (2021); Cyberscoop (2021),news,medium
+South American Grid Blackout,2019,Argentina,power,process_manipulation,voltage,none,electrical,0,0.0,4.7,population,3.0,4.7,5,SEVERE,CAMMESA (2019) Incident Report; S&P Global (2019),government,low
+Televent SCADA Remote Access Breach,2012,USA,energy,supply_chain_compromise,flow,none,none,0,0.0,2.0,ics_systems,1.0,2.0,5,LOW,Krebs on Security (2012) Televent; ICS-CERT Advisory (2012),news,medium
+APT10 Cloud Hopper MSP Campaign,2016,global,manufacturing,supply_chain_compromise,flow,none,none,0,0.0,2.0,ics_systems,1.0,2.0,5,LOW,DoJ Indictment (2018) US v. Zhu Hua; PWC/BAE Systems (2017) Cloud Hopper,government,high
+COSCO Shipping Ransomware,2018,China,transportation,remote_shutdown,flow,none,mechanical,0,0.0,3.7,population,2.5,3.7,5,MODERATE,COSCO Statement (2018); Reuters (2018) COSCO Cyberattack,news,medium
+BEC Targeting ICS Procurement,2020,global,energy,supply_chain_compromise,voltage,none,none,0,0.0,0.0,ics_systems,1.0,1.0,4,LOW,FBI Private Industry Notification (2020); CISA (2020),government,medium
+HEXANE APCO Gas Plant Targeting,2019,Middle East,oil_gas,supply_chain_compromise,flow,none,none,0,0.0,2.0,ics_systems,1.0,2.0,5,LOW,Dragos (2019) HEXANE; Kaspersky (2019) Gas Sector Targeting,vendor_report,medium
+Black Kingdom Pulse VPN Utility Ransomware,2021,USA,energy,remote_shutdown,voltage,none,none,0,0.0,2.0,ics_systems,1.0,2.0,5,LOW,FBI Flash (2021) Black Kingdom; Dragos (2021),government,medium
+CyberAv3ngers Unitronics Global Water Campaign,2023,global,water,process_manipulation,level,more,chemical,0,0.0,2.7,population,1.3,2.7,5,MODERATE,CISA Advisory AA23-335A (2023); EPA (2023) Water Sector Alert,government,high
+South Korea Sewage SCADA Ransomware,2021,South Korea,water,remote_shutdown,flow,none,hydrological,0,0.0,3.0,population,0.7,3.0,4,MODERATE,KISA (2021) ICS Security Report; SecurityWeek (2021),government,medium
+Argentina Wind Farm SCADA Ransomware,2022,Argentina,energy,remote_shutdown,speed,none,mechanical,0,0.0,2.3,population,1.0,2.3,4,MODERATE,Dragos 2022 ICS/OT Cybersecurity Year in Review,vendor_report,low
+Riviera Beach Water Ransomware,2019,USA,water,remote_shutdown,level,none,chemical,0,0.0,1.6,population,0.8,1.6,4,LOW,Reuters (2019) Riviera Beach Ransomware; City Council Statement (2019),news,medium
+LockBit Wastewater Authority Attack,2023,USA,water,remote_shutdown,flow,none,none,0,0.0,2.2,population,1.2,2.2,4,MODERATE,CISA (2023) Water Sector Ransomware Advisory; WaterISAC (2023),government,medium
+Muleshoe Texas Water Tower Overflow,2024,USA,water,process_manipulation,level,more,hydrological,0,2.0,0.3,population,0.0,2.0,5,LOW,CISA (2024) Water Sector Alert; Wired (2024) Cyber Army Russia Reborn; FBI (2024),government,high
+GhostSec SiegedSec ICS Hacktivist Campaign,2023,global,water,process_manipulation,level,none,none,0,0.0,1.3,ics_systems,0.7,1.3,4,LOW,CISA (2023) Pro-Russia Hacktivist Alert; SecurityWeek (2023),government,medium
+Sandworm US Grid Infrastructure Targeting,2019,USA,power,supply_chain_compromise,voltage,none,none,0,0.0,2.0,ics_systems,1.0,2.0,6,LOW,CISA Alert AA20-049A (2020); US-CERT TA18-074A; DOJ Indictment (2020) Sandworm,government,high

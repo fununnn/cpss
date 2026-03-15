@@ -1,0 +1,727 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+\title{CPSS: A Severity Scale for Cyber-Physical Incidents\\
+in Industrial Control Systems}
+
+\author{
+  Shohei Suzuki \\
+  Independent Researcher \\
+  Tokyo, Japan \\
+  \texttt{dx94ke.tmu@gmail.com} \\
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Cyberattacks targeting Industrial Control Systems (ICS) can produce
+physical accidents, environmental contamination, and large-scale
+societal disruption. Existing metrics evaluate either cybersecurity
+vulnerabilities (e.g., CVSS) or process safety risks (e.g., HAZOP, SIL),
+but no general severity scale exists for cyber incidents that produce
+physical consequences.
+
+This paper introduces the Cyber-Physical Severity Scale (CPSS),
+a logarithmic scale designed to quantify the impact of cyber incidents
+affecting industrial systems. CPSS evaluates four dimensions:
+human casualties, environmental damage, infrastructure disruption,
+and economic loss. The scale distinguishes between actual and potential
+severity, enabling comparison of both realized and worst-credible
+consequences across incidents.
+
+We present a dataset of 100 documented ICS cyber incidents scored
+under the CPSS framework, spanning the period 2000--2024,
+each entry annotated with a primary source reference,
+source type (academic, government, vendor report, or news),
+and a confidence level reflecting the completeness and
+consistency of available public information.
+\end{abstract}
+
+%-------------------------------------------------------------------
+\section{Introduction}
+%-------------------------------------------------------------------
+
+Industrial Control Systems (ICS) operate critical infrastructure
+including power plants, water treatment facilities, oil and gas
+pipelines, chemical plants, and transportation systems.
+Cyberattacks targeting these systems may produce physical consequences:
+explosions, toxic releases, equipment destruction, and infrastructure
+disruption affecting large populations.
+
+Several incidents demonstrate this risk:
+Stuxnet (2010) destroyed uranium enrichment centrifuges at Iran's
+Natanz facility~\cite{langner};
+the Ukraine power grid attacks (2015, 2016) left hundreds of thousands
+of customers without electricity~\cite{eisac};
+Triton/TRISIS (2017) disabled safety instrumented systems at a
+petrochemical plant in Saudi Arabia~\cite{fireeye};
+the Colonial Pipeline ransomware (2021) disrupted fuel supply across
+the southeastern United States.
+
+Despite the growing threat, there is no standard severity scale for
+cyber incidents that produce physical industrial consequences.
+Existing metrics address cybersecurity vulnerabilities or industrial
+process hazards independently, but do not capture the full chain from
+cyber intrusion to societal impact.
+The absence of such a scale makes it difficult to compare incidents,
+prioritize defensive investments, and communicate cyber-physical risk
+to policymakers and the public.
+
+This work proposes CPSS to fill this gap.
+
+%-------------------------------------------------------------------
+\section{Related Work}
+%-------------------------------------------------------------------
+
+The Common Vulnerability Scoring System (CVSS)~\cite{cvss} quantifies
+the severity of software vulnerabilities based on exploitability and
+impact on confidentiality, integrity, and availability.
+CVSS does not address physical consequences of cyber incidents.
+
+Process safety methodologies such as Hazard and Operability Study
+(HAZOP)~\cite{hazop} and Safety Integrity Levels (SIL/IEC~61511)
+analyze industrial process hazards.
+These methods address physical risk within normal operational contexts,
+but do not incorporate cyber attack vectors.
+
+The International Nuclear Event Scale (INES)~\cite{ines} classifies
+nuclear accidents by radiological impact on a seven-level ordinal scale.
+INES provides a useful precedent for domain-specific severity
+classification, but applies only to nuclear events.
+
+The IEC~62443 standard series~\cite{iec62443} addresses security for
+industrial automation and control systems through a zone-and-conduit
+model that defines security levels (SL~0--4) based on attack resistance.
+IEC~62443 focuses on vulnerability and resilience requirements;
+it does not quantify the physical consequence severity of a successful
+attack. CPSS is designed to complement IEC~62443 by providing a
+consequence metric that can be applied once an attack scenario and
+its physical impact are assessed.
+
+CPSS extends the severity-scale approach across all ICS sectors,
+integrating the cyber intrusion pathway with physical impact assessment.
+
+More broadly, CPSS belongs to the family of disaster severity scales
+used to classify large-scale natural and technological events.
+Examples include the Richter magnitude scale for earthquakes,
+the Volcanic Explosivity Index (VEI) for volcanic eruptions~\cite{vei},
+and the International Nuclear and Radiological Event Scale (INES)
+for nuclear accidents.
+These scales provide a common language for comparing events across
+different locations and time periods, enabling communication of risk
+to policymakers, engineers, and the public.
+CPSS extends this concept to cyber-physical incidents in
+industrial control systems.
+As industrial infrastructure becomes increasingly digitized,
+cyber-physical incidents represent an emerging class of disasters
+that require comparable severity classification.
+
+%-------------------------------------------------------------------
+\section{Cyber-Physical Incident Model}
+%-------------------------------------------------------------------
+
+ICS cyber incidents follow a causal chain from intrusion to impact:
+
+\begin{equation*}
+\text{Cyber Attack} \to
+\text{Control Manipulation} \to
+\text{Process Deviation} \to
+\text{Hazard Release} \to
+\text{Impact} \to
+\text{CPSS Score}
+\end{equation*}
+
+Control manipulation causes process variables (temperature, pressure,
+flow, level, speed, or voltage) to deviate from safe operating ranges.
+Process deviation in the HAZOP sense~\cite{hazop}---more, less, none,
+reverse, or unstable---releases hazardous energy or materials.
+The resulting exposure and propagation determine the final impact.
+
+%-------------------------------------------------------------------
+\section{Hazard Taxonomy}
+%-------------------------------------------------------------------
+
+CPSS classifies physical hazards released by ICS cyber incidents
+into six categories, with a seventh value of \emph{none} for
+incidents in which no physical process was manipulated:
+
+\begin{itemize}
+  \item \textbf{Chemical} --- toxic or flammable substance release
+  \item \textbf{Thermal} --- fire, explosion, or heat release
+  \item \textbf{Mechanical} --- equipment failure, structural damage
+  \item \textbf{Electrical} --- arc flash, grid instability
+  \item \textbf{Radiological} --- radioactive material release
+  \item \textbf{Hydrological} --- uncontrolled water or sewage release
+\end{itemize}
+
+When no physical hazard is triggered (e.g., reconnaissance-only
+intrusions), the hazard is recorded as \emph{none}.
+
+%-------------------------------------------------------------------
+\section{Impact Dimensions}
+%-------------------------------------------------------------------
+
+CPSS evaluates four dimensions of impact, each scored on a 0--10 scale.
+
+\subsection{Human Impact (H)}
+
+\begin{equation}
+  H = \log_{10}(100 \cdot \text{deaths} + 10 \cdot \text{hospitalized} + 1)
+  \label{eq:H}
+\end{equation}
+
+The $\times 100$ multiplier reflects the qualitatively greater severity
+of a fatality relative to an equivalent-count infrastructure disruption.
+The hospitalized weight ($\times 10$) reflects approximately one-tenth of a
+fatality, consistent with disability-adjusted life year (DALY) disability
+weights for serious injury requiring hospitalisation~\cite{who_daly}.
+$H = 0$ when deaths and hospitalized are both zero; $H > 0$ for any
+confirmed fatality or hospitalisation.
+Under this formulation, $H = 4$ corresponds to approximately 100 deaths
+or 1\,000 hospitalisations.
+Table~\ref{tab:H} shows representative reference values.
+
+\begin{table}[htbp]
+\centering
+\caption{Human Impact scale}
+\label{tab:H}
+\begin{tabular}{rrl}
+\toprule
+$H$ & Deaths & Hospitalized (deaths $= 0$) \\
+\midrule
+0 & 0 & 0 \\
+2 & $\sim$1 & $\sim$10 \\
+3 & $\sim$10 & $\sim$100 \\
+4 & $\sim$100 & $\sim$1{,}000 \\
+5 & $\sim$1{,}000 & $\sim$10{,}000 \\
+6 & $\sim$10{,}000 & $\sim$100{,}000 \\
+7 & $\sim$100{,}000 & $\sim$1{,}000{,}000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Calibration rationale.}
+The $\times 100$ multiplier is anchored to the value of statistical life (VSL).
+Using VSL $\approx \$10$M (per U.S.\ EPA guidance~\cite{epa_vsl}),
+100 fatalities imply a societal cost of approximately \$1B,
+corresponding to $C = 4$.
+This creates cross-dimensional consistency:
+$H = 4$ (100~deaths), $I = 4$ (10~million people with service disruption),
+and $C = 4$ (\$1B direct loss) are calibrated to represent equivalent severity.
+The implicit \$100 per-person disruption cost embedded in the $H/I$ calibration
+is a conservative lower bound for a major infrastructure outage
+affecting essential services over several days.
+In practice, $H$ takes values in $\{0\} \cup [2,\, 10]$:
+a single confirmed fatality ($\text{deaths} = 1$) yields
+$H = \log_{10}(101) \approx 2.0$, so the interval $(0,\, 2)$ is unreachable
+for integer death counts.
+
+\subsection{Environmental Impact (E)}
+
+\begin{equation}
+  E = \log_{10}\!\left(\frac{A \cdot P}{10}\right)
+  \qquad (E = 0 \text{ if no contamination release})
+  \label{eq:E}
+\end{equation}
+
+where $A$ is the contaminated area in square metres and $P$ is a persistence
+factor representing estimated remediation duration.
+$E$ is capped at 10; values yielding a negative logarithm are treated as $E = 0$.
+
+$P$ takes one of four discrete values anchored to established remediation
+literature: $P = 1$ (days to weeks, natural recovery, per WHO
+drinking-water guidelines~\cite{who_water}); $P = 10$ (months to one year,
+per EPA SPCC oil spill response guidance~\cite{epa_spcc}); $P = 100$
+(one to ten years, based on the EPA Superfund average cleanup duration
+of approximately seven years~\cite{epa_cercla}); or $P = 1000$
+(decades or irreversible, per IAEA post-accident
+decontamination standards~\cite{iaea_decon}).
+
+When incident-specific remediation data are unavailable, Table~\ref{tab:P_hazard}
+provides default $P$ values by hazard category.
+Observed remediation data take precedence over defaults.
+
+\begin{table}[htbp]
+\centering
+\caption{Default persistence factor $P$ by hazard category and
+         representative $E$ calibration values}
+\label{tab:P_hazard}
+\begin{tabular}{llccc}
+\toprule
+Hazard & Default $P$ & Example $A$ (m$^2$) & $E$ & Scenario \\
+\midrule
+Mechanical   & 1    & 100       & 1 & Equipment debris, days \\
+Electrical   & 1--10 & 100      & 1--2 & Transformer oil spill, weeks \\
+Hydrological & 10   & 10{,}000  & 4 & Local waterway, months \\
+Thermal      & 10--100 & 1{,}000 & 3--5 & Hydrocarbon soil, months--years \\
+Chemical     & 100  & 1{,}000   & 5 & Industrial release, years \\
+Radiological & 1000 & 100       & 4 & Facility contamination, decades \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Infrastructure Impact (I)}
+\label{sec:I}
+
+\begin{equation}
+  I = \log_{10}\!\left(\frac{\text{population directly affected}}{1{,}000} + 1\right)
+  \label{eq:I}
+\end{equation}
+
+The divisor of 1,000 calibrates I relative to H: at score 4,
+approximately 100 deaths (H) corresponds to 10 million people
+with service disruption (I), reflecting the greater per-person
+severity of fatality versus temporary loss of service.
+
+\noindent\textbf{Note on hazard = none entries ($I_\text{access}$).}
+For ICS-scoped reconnaissance incidents where no physical process
+was manipulated (\textit{hazard} = \textit{none}), no population
+experienced a service disruption, so the standard population-based
+formula does not apply. Instead, a substitute indicator
+$I_\text{access}$ is recorded in the \textit{I} field:
+
+\begin{equation}
+  I_\text{access} = \log_{10}(\text{compromised ICS systems} + 1)
+  \label{eq:I_access}
+\end{equation}
+
+This measures the breadth of attacker foothold rather than
+societal service disruption. The \texttt{i\_basis} field in the
+dataset CSV distinguishes the two interpretations
+(\texttt{population} vs.\ \texttt{ics\_systems}).
+Users should not compare $I$ and $I_\text{access}$ values directly
+across entries without accounting for this distinction.
+See the dataset scope discussion in Section~\ref{sec:discussion}.
+
+\subsection{Economic Impact (C)}
+
+\begin{equation}
+  C = \log_{10}\!\left(\frac{\text{loss (USD)}}{100{,}000}\right)
+  \qquad (C = 0 \text{ if loss} = 0)
+  \label{eq:C}
+\end{equation}
+
+This gives $C = 3$ for \$100M and $C = 4$ for \$1B. Only direct, confirmed
+losses are used; indirect or estimated downstream losses are excluded.
+Losses below \$100{,}000 yield a negative log value and are treated as $C = 0$.
+
+%-------------------------------------------------------------------
+\section{CPSS Score}
+%-------------------------------------------------------------------
+
+\begin{equation}
+  \text{CPSS} = \max(H,\; E,\; I,\; C)
+  \label{eq:cpss}
+\end{equation}
+
+Many disaster scales are defined by the dominant physical consequence
+of the event rather than the sum of heterogeneous effects.
+The Richter scale reflects peak seismic magnitude;
+INES is determined by the dominant radiological impact.
+CPSS follows the same principle by defining severity as the maximum
+impact dimension.
+This approach captures the key characteristic of disasters:
+overall severity is determined by the worst consequence,
+not by the average or sum of heterogeneous impacts.
+
+An important empirical observation from the incident dataset is that
+H rarely dominates the CPSS score for ICS cyber incidents.
+Of the 100 incidents in the dataset, $H > 0$ in only two cases
+(Chatsworth Train Collision, 2008: $H = 3.6$;
+Taum Sauk Dam SCADA Overflow, 2005: $H = 1.6$);
+in both, another dimension exceeds $H$
+($C = 3.7$ and $E = 6.6$, respectively),
+so $H$ is the dominant dimension in zero incidents.
+This reflects a characteristic of ICS attacks: adversaries generally
+seek infrastructure disruption rather than direct casualties,
+and physical safety systems often prevent the worst human outcomes
+even when process integrity is compromised.
+Consequently, I and C tend to be the dominant dimensions.
+
+\subsection{Vector String Notation}
+
+To preserve multi-dimensional information that is otherwise lost
+when a scalar score is computed via the maximum operator,
+CPSS defines a compact vector string:
+
+\begin{center}
+\texttt{CPSS:1.0/H:\textit{h}/E:\textit{e}/I:\textit{i}/C:\textit{c}/A:\textit{a}/P:\textit{p}}
+\end{center}
+
+where \textit{h}, \textit{e}, \textit{i}, \textit{c} are the four
+dimension scores rounded to one decimal place,
+\textit{a} is CPSS-Actual, and \textit{p} is CPSS-Potential.
+The prefix \texttt{CPSS:1.0} identifies the specification version.
+
+\noindent\textbf{Example} (Maroochy Shire, 2000~\cite{slay}):
+\texttt{CPSS:1.0/H:0.0/E:4.0/I:0.3/C:0.0/A:4.0/P:5.0}
+
+The vector string enables precise incident comparison and
+machine-readable data exchange without sacrificing the
+interpretability of the scalar class label.
+
+\subsection{Actual and Potential Severity}
+
+CPSS distinguishes two evaluations:
+
+\begin{itemize}
+  \item \textbf{CPSS-Actual}: score based on consequences that occurred.
+  \item \textbf{CPSS-Potential}: score based on the worst credible
+        consequence given the attack scenario and access achieved,
+        corresponding to the safety-engineering concept of
+        Maximum Credible Accident.
+\end{itemize}
+
+The gap between actual and potential severity is analytically
+significant: a large gap indicates that defenses, luck, or attacker
+restraint prevented the worst outcome.
+
+To reduce subjectivity in CPSS-Potential assessment, analysts should
+anchor their evaluation to the highest access level achieved by the
+attacker, using Table~\ref{tab:potential_rubric} as a guide.
+The table provides a recommended upper bound on CPSS-Potential
+for each access level; analysts may assign lower values when
+the target system's hazard profile does not support a higher consequence.
+Incident-specific evidence (e.g., confirmed SIS bypass, operator
+testimony) takes precedence over rubric defaults.
+
+\begin{table}[htbp]
+\centering
+\caption{CPSS-Potential assessment rubric by attacker access level}
+\label{tab:potential_rubric}
+\begin{tabular}{lcc}
+\toprule
+Attacker Access Level & Max Credible & Basis \\
+                      & CPSS-Potential & \\
+\midrule
+IT network only (OT isolated)              & $\leq 4$ & No direct process control \\
+OT-adjacent (HMI, historian, DMZ)          & $\leq 5$ & Limited process influence \\
+OT control system reached (PLC/DCS)        & $\leq 6$ & Process deviation achievable \\
+Safety system reached (SIS/SIL)            & $\leq 7$ & Last-line defense intact \\
+Safety system disabled or bypassed         & $\leq 8$ & No automated safeguard \\
+Multiple facilities or national grid       & $\leq 9$ & Cascading failure possible \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Severity Classes}
+
+\begin{table}[htbp]
+\centering
+\caption{CPSS Severity Classes}
+\label{tab:class}
+\begin{tabular}{cll}
+\toprule
+Score & Class & Example consequence \\
+\midrule
+0         & NONE         & No measurable impact \\
+$>0$--2   & LOW          & Localised, contained \\
+$>2$--4   & MODERATE     & Facility-level disruption \\
+$>4$--6   & SEVERE       & Regional infrastructure disruption \\
+$>6$--8   & CATASTROPHIC & National-scale impact \\
+$>8$--10  & CRITICAL     & Global or irreversible \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%-------------------------------------------------------------------
+\section{Case Studies}
+%-------------------------------------------------------------------
+
+Table~\ref{tab:cases} presents eight representative incidents
+from the full dataset of 100 events (2000--2024).
+Scores for H, E, I, C reflect CPSS-Actual.
+
+\begin{table*}[t]
+\centering
+\caption{Selected ICS cyber incidents scored under CPSS}
+\label{tab:cases}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{llccccccc}
+\toprule
+Event & Year & Sector & Hazard & $H$ & $E$ & $I$ & $C$
+      & CPSS$_\text{act}$ / CPSS$_\text{pot}$ \\
+\midrule
+Maroochy Shire Sewage    & 2000 & Water        & Hydrological & 0 & 4 & 0.3 & 0 & 4 / 5 \\
+Stuxnet                  & 2010 & Nuclear      & Mechanical   & 0 & 3 & 1.0 & 2 & 3 / 6 \\
+Ukraine Grid 1           & 2015 & Power        & Electrical   & 0 & 1 & 2.4 & 3 & 3 / 6 \\
+Triton TRISIS            & 2017 & Oil \& Gas   & Thermal      & 0 & 1 & 0.3 & 2 & 2 / 7 \\
+Colonial Pipeline        & 2021 & Oil \& Gas   & none         & 0 & 0 & 3.0 & 3 & 3 / 5 \\
+Predatory Sparrow Steel  & 2022 & Manufacturing& Thermal      & 0 & 2 & 0.3 & 2 & 2 / 5 \\
+Industroyer2             & 2022 & Power        & Electrical   & 0 & 0 & 0.0 & 0 & 0 / 6 \\
+Volt Typhoon ICS$^\dagger$ & 2024 & Power      & none         & 0 & 0 & 0.0 & 1 & 1 / 7 \\
+\bottomrule
+\end{tabular}
+}
+\end{table*}
+\noindent$^\dagger$ Suspected ICS pre-positioning; confirmed OT compromise not publicly disclosed as of the time of writing.
+
+Several observations emerge from the dataset.
+
+\textbf{High potential, low actual.}
+Triton TRISIS (CPSS$_\text{act}=2$, CPSS$_\text{pot}=7$) and
+Industroyer2 (CPSS$_\text{act}=0$, CPSS$_\text{pot}=6$) represent
+incidents where defenses or attacker restraint prevented catastrophic
+outcomes. The gap between actual and potential severity is the largest
+in the dataset and underscores the unique risk posed by attacks on
+safety-critical systems.
+
+\textbf{IT-to-OT cascade with substantial infrastructure impact.}
+Colonial Pipeline (CPSS$_\text{act}=3$, CPSS$_\text{pot}=5$) demonstrates
+how an IT-layer ransomware attack can produce significant infrastructure
+disruption through proactive operator shutdown, without direct OT system
+compromise. The remaining gap of 2 reflects that a more sophisticated
+attack reaching OT systems could have produced worse consequences.
+
+\textbf{Physical damage without confirmed fatalities.}
+Predatory Sparrow (2022)~\cite{claroty_sparrow} is among the few incidents
+in the dataset with publicly documented physical equipment damage
+(molten steel spill, worker evacuations), yet CPSS$_\text{act} = 2$
+due to the localised scale and the absence of confirmed fatalities ($H = 0$).
+This illustrates that physical consequences do not necessarily translate
+to high human impact scores.
+
+\textbf{High-potential foiled attack.}
+Industroyer2 (2022)~\cite{eset_industroyer2} was detected and neutralised
+before execution, resulting in CPSS$_\text{act} = 0$ despite the malware
+being designed to issue direct commands to high-voltage substations.
+The CPSS$_\text{pot} = 6$ reflects that successful execution could have
+produced a regional grid disruption comparable to the 2016 Kyiv blackout.
+
+%-------------------------------------------------------------------
+\section{Discussion}
+\label{sec:discussion}
+%-------------------------------------------------------------------
+
+\textbf{Limitations.}
+CPSS scores depend on the quality of available incident data.
+Many ICS incidents are not publicly disclosed, and reported figures
+for casualties, affected populations, and economic losses are often
+incomplete or inconsistent across sources.
+The CPSS-Potential score requires expert judgment of counterfactual
+scenarios, introducing subjectivity.
+Table~\ref{tab:potential_rubric} provides an access-level rubric
+to anchor assessments, but two analysts evaluating the same incident
+may still produce different potential scores,
+particularly for incidents where attacker access is partially disclosed.
+An event that severely impacts all four dimensions simultaneously
+receives the same CPSS score as one that affects a single dimension
+at the same level, since CPSS is designed as a worst-case severity
+indicator rather than a compound risk index.
+Users requiring compound severity analysis may compute an auxiliary indicator
+such as the count of dimensions exceeding a chosen threshold.
+
+\textbf{Dataset scope and composition.}
+The 42-incident dataset applies a principled inclusion criterion:
+an entry is included if the attack was scoped to ICS or OT systems,
+regardless of whether physical consequences occurred.
+Specifically, the dataset covers three categories:
+(1)~incidents with confirmed physical consequences
+(process manipulation, equipment damage, or environmental release);
+(2)~IT-to-OT cascade incidents, where an IT-layer attack caused
+physical shutdown or operational disruption;
+and (3)~ICS-scoped reconnaissance and pre-positioning campaigns,
+where attackers reached OT-adjacent systems without triggering
+a physical process deviation.
+Pure IT incidents---ransomware or data-theft campaigns where OT systems
+remained isolated and unaffected---are excluded.
+
+This categorisation is reflected in the \textit{hazard} field of the
+dataset schema. Entries in category~(3) carry \textit{hazard = none}
+and low CPSS-Actual scores, while their CPSS-Potential scores reflect
+the physical consequence achievable given the access obtained.
+The gap between CPSS-Actual and CPSS-Potential is itself analytically
+meaningful for these entries: Triton TRISIS (actual~=~2,
+potential~=~7) and INCONTROLLER/PIPEDREAM (actual~=~1, potential~=~7)
+demonstrate that sophisticated actors can reach safety-critical systems
+without triggering a physical accident, preserving latent risk
+for future exploitation.
+Users of the dataset should interpret entries with
+\textit{hazard = none} with appropriate caution, as CPSS-Actual
+reflects access and remediation costs rather than physical impact.
+
+\textbf{Comparison with existing scales.}
+CVSS focuses on software vulnerability characteristics prior to
+exploitation and does not address physical impact.
+INES is restricted to nuclear events and uses a fixed seven-level
+ordinal scale. CPSS is designed as a general-purpose scale applicable
+across all ICS sectors, using quantitative logarithmic dimensions
+(H, I, E, C) derived from measurable physical quantities, enabling
+consistent scoring across all industrial hazard types without
+requiring domain-specific expert judgment for any single dimension.
+
+\textbf{Future work.}
+Because CPSS-Actual is determined by formula, inter-rater reliability
+questions concern only CPSS-Potential.
+Structured reliability studies comparing CPSS-Potential assessments across
+independent analysts using the access-level rubric would establish the
+empirical variance of this dimension and identify rubric bounds that require
+refinement.
+Additional directions include validating default persistence factors
+against remediation records from documented industrial accidents,
+extending dataset coverage through community contribution,
+and integrating CPSS scoring into existing ICS incident reporting
+templates to enable longitudinal severity tracking.
+
+\textbf{Determinism of CPSS-Actual.}
+CPSS-Actual is fully deterministic: given the four numeric inputs---death toll,
+contaminated area and persistence factor, population with service disruption,
+and direct economic loss---the score is uniquely determined by formula.
+No analyst judgment is required for the actual score.
+This eliminates inter-rater variance for confirmed-consequence scoring;
+any analyst applying the same confirmed data will produce the same CPSS-Actual
+score without coordinated training or calibration exercises.
+Subjectivity enters only in CPSS-Potential, which the access-level rubric
+in Table~\ref{tab:potential_rubric} is designed to constrain by bounding
+assessments to the highest attacker access level confirmed.
+
+\textbf{Adoption pathway.}
+CPSS is designed to spread through use rather than through top-down mandate.
+Three properties support organic adoption.
+First, the determinism property described above means that any analyst scoring
+the same incident with the same confirmed data will arrive at the same
+CPSS-Actual score, giving the scale the reproducibility needed for
+comparative use across reports and organisations.
+Second, the specification, dataset, and reference implementation are
+released as open resources under an MIT licence.
+Any incident report author may compute and publish a CPSS vector string
+alongside their narrative description; any tool may integrate the
+reference implementation.
+The GitHub repository serves as the canonical, version-controlled source
+for the specification and dataset schema.
+Third, formal adoption by standards bodies
+(ISA99/IEC~TC65, ENISA, CISA) remains a long-term option but is not
+a prerequisite for practical use.
+Precedent exists for widely-used scales---including CVSS itself---that
+originated as research proposals and achieved operational adoption through
+community uptake before formal standardisation.
+
+%-------------------------------------------------------------------
+\section{Conclusion}
+%-------------------------------------------------------------------
+
+This paper introduced CPSS, a severity scale for cyber incidents
+affecting industrial control systems.
+CPSS evaluates four impact dimensions---human, environmental,
+infrastructure, and economic---on a common logarithmic scale,
+and defines overall severity as the dominant dimension.
+The distinction between CPSS-Actual and CPSS-Potential enables
+analysis of both realised consequences and worst-credible outcomes.
+
+A dataset of 100 documented incidents spanning 2000--2024 demonstrates
+the framework's applicability across sectors including power, water,
+oil and gas, manufacturing, and transportation.
+The dataset, reference implementation, and full specification are
+released as an open resource to support further research in
+cyber-physical risk assessment:
+\url{https://github.com/fununnn/cpss}
+
+%-------------------------------------------------------------------
+\bibliographystyle{plain}
+\begin{thebibliography}{9}
+
+\bibitem{iec62443}
+ISA/IEC,
+\emph{IEC 62443: Security for Industrial Automation and Control Systems},
+International Electrotechnical Commission, Geneva, 2018--2023.
+
+\bibitem{cvss}
+FIRST.org,
+\emph{Common Vulnerability Scoring System v3.1 Specification},
+2019.
+\url{https://www.first.org/cvss/specification-document}
+
+\bibitem{hazop}
+IEC 61882,
+\emph{Hazard and Operability Studies (HAZOP Studies) ---
+Application Guide},
+International Electrotechnical Commission, 2016.
+
+\bibitem{ines}
+International Atomic Energy Agency,
+\emph{INES: The International Nuclear and Radiological Event Scale
+User's Manual}, 2nd~ed.,
+IAEA, Vienna, 2013.
+
+\bibitem{langner}
+R.~Langner,
+``Stuxnet: Dissecting a Cyberwarfare Weapon,''
+\emph{IEEE Security \& Privacy}, vol.~9, no.~3, pp.~49--51, 2011.
+
+\bibitem{eisac}
+Electricity Information Sharing and Analysis Center (E-ISAC),
+\emph{Analysis of the Cyber Attack on the Ukrainian Power Grid},
+March 2016.
+
+\bibitem{fireeye}
+FireEye,
+\emph{TRITON: New ICS Malware Targeting Safety Instrumented Systems},
+December 2017.
+
+\bibitem{vei}
+C.~G.~Newhall and S.~Self,
+``The Volcanic Explosivity Index (VEI): An Estimate of Explosive
+Magnitude for Historical Volcanism,''
+\emph{Journal of Geophysical Research: Oceans}, vol.~87, no.~C2,
+pp.~1231--1238, 1982.
+
+\bibitem{slay}
+J.~Slay and M.~Miller,
+``Lessons Learned from the Maroochy Water Breach,''
+in \emph{Critical Infrastructure Protection}, IFIP vol.~253,
+Springer, 2007, pp.~73--82.
+
+\bibitem{epa_vsl}
+U.S. Environmental Protection Agency,
+\emph{Mortality Risk Valuation},
+\url{https://www.epa.gov/environmental-economics/mortality-risk-valuation},
+2024.
+
+\bibitem{who_daly}
+World Health Organization,
+\emph{Global Health Estimates: Life Expectancy and Leading Causes of Death
+and Disability},
+WHO, Geneva, 2024.
+
+\bibitem{who_water}
+World Health Organization,
+\emph{Guidelines for Drinking-water Quality}, 4th ed.,
+WHO, Geneva, 2017.
+
+\bibitem{epa_spcc}
+U.S. Environmental Protection Agency,
+\emph{Spill Prevention, Control, and Countermeasure (SPCC) Rule},
+40~CFR Part~112, EPA, Washington, DC, 2024.
+
+\bibitem{epa_cercla}
+U.S. Environmental Protection Agency,
+\emph{Superfund Remedy Report}, 16th ed.,
+EPA-542-R-20-001, EPA, Washington, DC, 2020.
+
+\bibitem{iaea_decon}
+International Atomic Energy Agency,
+\emph{Cleanup of Large Areas Contaminated as a Result of a Nuclear Accident},
+IAEA-TECDOC-1162, IAEA, Vienna, 2000.
+
+\bibitem{claroty_sparrow}
+Claroty Team82,
+``Predatory Sparrow's Attack on Steel Industry,''
+Claroty Research Blog, February 2022.
+\url{https://claroty.com/team82/research/predatory-sparrow}
+
+\bibitem{eset_industroyer2}
+ESET Research,
+``Industroyer2: Industroyer reloaded,''
+ESET White Paper, April 2022.
+\url{https://www.welivesecurity.com/2022/04/12/industroyer2-industroyer-reloaded/}
+
+\end{thebibliography}
+
+\end{document}
